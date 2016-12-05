@@ -1,0 +1,2 @@
+netty3=com.ayb.rpc.transport.netty3.Netty3EndpointFactory
+netty4=com.ayb.rpc.transport.netty4.Netty4EndpointFactory

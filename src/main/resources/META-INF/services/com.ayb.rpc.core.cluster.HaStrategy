@@ -1,0 +1,2 @@
+failfast=com.ayb.rpc.core.cluster.strategy.FailfastHaStrategy
+failover=com.ayb.rpc.core.cluster.strategy.FailoverHaStrategy

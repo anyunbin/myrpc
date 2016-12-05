@@ -1,0 +1,2 @@
+hessian=com.ayb.rpc.serialize.HessianSerialization
+protostuff=com.ayb.rpc.serialize.ProtostuffSerialization
