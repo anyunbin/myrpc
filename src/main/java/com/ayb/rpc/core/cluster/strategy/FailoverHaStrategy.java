@@ -5,7 +5,7 @@ import com.ayb.rpc.core.cluster.Balance;
 import com.ayb.rpc.core.refer.Referer;
 import com.ayb.rpc.core.transport.Request;
 import com.ayb.rpc.core.transport.Response;
-import com.ayb.rpc.exception.RpcException;
+import com.ayb.rpc.core.exception.RpcException;
 
 /**
  * Created by yunbinan on 16-9-19.
