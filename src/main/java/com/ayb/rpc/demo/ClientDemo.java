@@ -15,7 +15,7 @@ public class ClientDemo {
         ReferConfig<SmsService> referConfig = new ReferConfig<SmsService>();
         referConfig.setInterfaceClass(SmsService.class);
         final SmsService smsService = referConfig.getRef();
-        ThreadPoolExecutor pool = new ThreadPoolExecutor(1, 20, 1, TimeUnit.MINUTES, new LinkedBlockingQueue<Runnable>(10000),new ThreadPoolExecutor.CallerRunsPolicy());
+        ThreadPoolExecutor pool = new ThreadPoolExecutor(1, 20, 1, TimeUnit.MINUTES, new LinkedBlockingQueue<Runnable>(10000), new ThreadPoolExecutor.CallerRunsPolicy());
         int i = 0;
         while (true) {
             pool.execute(new Runnable() {

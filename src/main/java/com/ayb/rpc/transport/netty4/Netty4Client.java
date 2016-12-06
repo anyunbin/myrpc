@@ -32,7 +32,6 @@ public class Netty4Client extends AbstractClient {
 
     @Override
     public void heartbeat(Request request) {
-        ChannelFuture future = channel.channel().write(request);
     }
 
     @Override
@@ -47,7 +46,7 @@ public class Netty4Client extends AbstractClient {
 
     @Override
     public void request(Request request) {
-        channel.channel().write(request);
+        channel.channel().writeAndFlush(request);
     }
 
     @Override
@@ -75,11 +74,12 @@ public class Netty4Client extends AbstractClient {
                     })
                     .option(ChannelOption.SO_KEEPALIVE, true);
             channel = bootstrap.connect(config.getHost(), config.getPort()).sync();
+            channel.channel().write(new DefaultRequest());
+            System.out.println(channel.channel().isOpen());
             return true;
         } catch (InterruptedException e) {
             return false;
         }
-
     }
 
     @Override

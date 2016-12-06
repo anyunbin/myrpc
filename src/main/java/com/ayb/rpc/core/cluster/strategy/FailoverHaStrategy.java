@@ -24,6 +24,7 @@ public class FailoverHaStrategy extends AbstractHaStrategy {
         try {
             return referer.call(request);
         } catch (Exception e) {
+            e.printStackTrace();
             return call(request, balance, attempts - 1);
         }
     }

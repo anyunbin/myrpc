@@ -5,6 +5,8 @@ import com.ayb.rpc.core.provider.Provider;
 import com.ayb.rpc.core.transport.DefaultResponse;
 import com.ayb.rpc.core.transport.Request;
 import com.ayb.rpc.core.transport.Response;
+import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import org.slf4j.Logger;
@@ -34,12 +36,14 @@ public class Netty4ChannelHandler extends SimpleChannelInboundHandler {
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, Object msg) throws Exception {
         Object message = msg;
+        //服务端接受消息
         if (message instanceof Request) {
             processRequest(ctx, (Request) message);
-        } else if (message instanceof Response) {
+        }
+        //客户端接受回馈
+        else if (message instanceof Response) {
             processResponse(ctx, message);
         }
-        System.out.println(msg);
     }
 
     //服务端接收到客户端的请求
@@ -64,9 +68,8 @@ public class Netty4ChannelHandler extends SimpleChannelInboundHandler {
 
                     response.setRequestId(request.getRequestId());
                     response.setProcessTime(System.currentTimeMillis() - processStartTime);
-
                     if (channelHandlerContext.channel().isActive()) {
-                        channelHandlerContext.channel().write(response);
+                        ChannelFuture future = channelHandlerContext.writeAndFlush(response);
                     }
                 }
             });
@@ -86,6 +89,7 @@ public class Netty4ChannelHandler extends SimpleChannelInboundHandler {
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
         logger.error(cause.getMessage());
+        cause.printStackTrace();
         ctx.channel().close();
     }
 }
