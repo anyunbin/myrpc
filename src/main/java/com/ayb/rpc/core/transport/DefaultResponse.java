@@ -22,7 +22,7 @@ public class DefaultResponse implements Response {
 
     //为实现阻塞 同步调用的构造方法
     public DefaultResponse(Response response) {
-        this.value = response.getValue();
+        this.value = response.getValue();   //超时等异常
         this.exception = response.getException();
         this.requestId = response.getRequestId();
         this.processTime = response.getProcessTime();

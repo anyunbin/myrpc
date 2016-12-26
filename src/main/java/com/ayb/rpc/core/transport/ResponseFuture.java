@@ -1,5 +1,6 @@
 package com.ayb.rpc.core.transport;
 
+import com.ayb.rpc.core.exception.RpcException;
 import com.ayb.rpc.util.Constant;
 import sun.misc.Lock;
 
@@ -63,7 +64,7 @@ public class ResponseFuture implements Response, Future {
                             } else {
                                 waitTime = timeout - (System.currentTimeMillis() - createTime);
                                 if (waitTime <= 0) {
-                                    break;
+                                    throw new RpcException();
                                 }
                             }
                         }

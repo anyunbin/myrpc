@@ -27,10 +27,11 @@ public class ServiceConfig<T> extends AbstractConfig {
     private Protocol<T> protocol;
     private RegisterConfig registerConfig; //注册中心
     private String hostAddress;
-    private int port = 9012;   //服务占用地址
+    private int port;   //服务占用地址
     private T ref; //接口实现类的实例
 
     public void doExport() {
+        port = protocolConfig.getPort();
         registerConfig = loadRegistryUrl();  //获取注册配置 目前只支持一个注册中心
         registerConfig.setParentPath(interfaceClass.getName());
         registerConfig.setServerPort(port);

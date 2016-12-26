@@ -27,7 +27,6 @@ public class RefererInvocationHandler<T> implements InvocationHandler {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        long start = System.nanoTime();
         DefaultRequest request = new DefaultRequest();
         request.setRequestId(RequestIdGenerator.getRequestId());
         request.setInterfaceName(method.getDeclaringClass().getName());
@@ -35,11 +34,8 @@ public class RefererInvocationHandler<T> implements InvocationHandler {
         request.setArguments(args);
         request.setParamtersDesc(ReflectUtil.getMethodParamDesc(method));
         Response response;
-        //System.out.println(System.nanoTime() - start);
         response = cluster.call(request);
-        //System.out.println(System.nanoTime() - start);
         Object result = response.getValue();
-        //System.out.println(System.nanoTime() - start);
         return result;
     }
 }

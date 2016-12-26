@@ -4,6 +4,8 @@ package com.ayb.rpc.core.config;
  * Created by yunbinan on 16-10-26.
  */
 public class ProtocolConfig {
+    // 端口
+    private int port = 9012;
 
     // 服务协议
     private String name = "default";
@@ -28,7 +30,7 @@ public class ProtocolConfig {
 
     protected String register = "zookeeper";
 
-    protected int attempts = 3;
+    protected int attempts = 2;
 
     protected String transport = "netty4";
 
@@ -39,6 +41,14 @@ public class ProtocolConfig {
     protected int workerQueueSize = 1;
 
     protected boolean isAsyn = false;
+
+    public int getPort() {
+        return port;
+    }
+
+    public void setPort(int port) {
+        this.port = port;
+    }
 
     public String getName() {
         return name;
